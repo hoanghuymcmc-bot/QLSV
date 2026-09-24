@@ -1,3 +1,7 @@
+import numpy as np
+import pandas as pd
+
+
 # ===== khơi tạo danh sách sinh viên =====
 
 danhsach = []
@@ -21,6 +25,11 @@ sinhvien2 = {
 } 
 danhsach.append(sinhvien1)
 danhsach.append(sinhvien2)
+
+
+    
+    
+
 
 # ===== in thông tin sinh viên =====
 
@@ -115,6 +124,26 @@ def thong_ke_sinh_vien(danhsach):
     print("tuổi lớn nhất: ", tuoilonnhat)
     print("tuổi nhỏ nhất: ", tuoinhonhat)
 
+#===== phân tích dữ liệu =====
+
+def phan_tich_du_lieu(danhsach):
+    # chuyển danh sách sinh viên thành DataFrame
+    df = pd.DataFrame(danhsach)
+    if len(df) == 0:
+      print("Chưa có dữ liệu sinh viên")
+      return
+    tuoi = np.array(df["tuổi"])
+    print("tổng số sinh viên: ", len(df))
+    print("tuổi trung bình: ", np.mean(tuoi))
+    print("tuổi lớn nhất: ", np.max(tuoi))
+    print("tuổi nhỏ nhất: ", np.min(tuoi))
+    print("tổng số ngành học: ", df["ngành"].nunique())
+    print("Số lượng sinh viên theo trường:")
+    print(df["trường"].value_counts())
+    print("Số lượng sinh viên theo ngành:")
+    print(df["ngành"].value_counts())
+    
+
 while True:
     print("===== QUẢN LÝ SINH VIÊN =====")
     print("1. Thêm sinh viên")
@@ -123,7 +152,8 @@ while True:
     print("4. Sửa sinh viên")
     print("5. Xóa sinh viên")
     print("6. Thống kê")
-    print("7. Thoát")
+    print("7. Phân tích dữ liệu")
+    print("8. Thoát")
 
     lua_chon = input("Chọn chức năng: ")
 
@@ -143,4 +173,6 @@ while True:
     if lua_chon == "6":
         thong_ke_sinh_vien(danhsach)
     elif lua_chon == "7":
-        break                            
+        phan_tich_du_lieu(danhsach)
+    elif lua_chon == "8":
+        break
